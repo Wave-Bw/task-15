@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>题目8</title>
+  <style>
+    ul > li {
+      list-style: none;
+      border: 1px solid black;
+      padding: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn {
+      border: 1px solid red;
+      border-radius: 5px;
+      color: red;
+      cursor: pointer;
+      height: 40px;
+      line-height: 40px;
+      width: 80px;
+      margin: 10px auto;
+      text-align: center;
+    }
+    .hover {
+      background-color: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<ul>
+  <li>内容1</li>
+  <li>内容2</li>
+</ul>
+<div class="btn">
+  加载更多
+</div>
+
+
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+  $('ul').on('mouseenter','li',function () {
+    $(this).addClass('hover')
+  }).on('mouseleave','li',function () {
+    $(this).removeClass('hover')
+  })
+  var j = 3;
+  $('.btn').on('click',function () {
+    for(var i=0; i<4; i++){
+      $('ul').append('<li></li>')
+      $('ul li:last-child').text('内容' + j)
+      j += 1
+    }
+  })
+</script>
+</body>
+</html>

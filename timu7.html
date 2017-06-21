@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>题目7</title>
+  <style>
+    div {
+      border: 2px solid black;
+    }
+    #btn {
+      width: 50px;
+      height: 25px;
+      cursor: pointer;
+    }
+    .wrap {
+      margin: 50px;
+      padding: 20px;
+    }
+    #change-bgc {
+      width: 60px;
+      padding: 60px;
+      background-color: #fff;
+    }
+    .bgc-g {
+      background-color: grey;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <p>当点击 $btn 时，让 $btn 的背景色变为红色再变为蓝色</p>
+  <div id="btn">$btn</div>
+</div>
+<div id="show-sroll-num" class="wrap">
+  <p>当窗口滚动时，获取垂直滚动距离</p>
+  <p>当前垂直滚动距离：</p>
+  <p id="scrol"></p>
+</div>
+<div class="wrap bgc-g">
+  <p>当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色</p>
+  <div id="change-bgc">$div</div>
+</div>
+<div class="wrap">
+  <p>当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字</p>
+  <input type="text" id="inp">
+</div>
+<div class="wrap">
+  <p>当选择 select 后，获取用户选择的内容</p>
+  <div class="wrap">
+    <select name="city" id="city">
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="广东">广东</option>
+    </select>
+    <div>
+      <p>当前选择城市：</p>
+      <p id="chosed">北京</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="jquery-3.2.1.min.js"></script>
+<script>
+  /*当点击 $btn 时，让 $btn 的背景色变为红色再变为蓝色*/
+  var $btn = $('#btn')
+  $btn.on('click',function(){
+    $btn.css('background-color','red')
+    setTimeout(function(){
+      $btn.css('background-color','blue')
+    },1500)
+  })
+
+ /* 当窗口滚动时，获取垂直滚动距离*/
+  var $showSro = $('#show-sroll-num')
+  var $scrol = $('#scrol')
+  $scrol.text($(window).scrollTop())
+  $(window).on('scroll', function (){
+    $scrol.text($(window).scrollTop())
+  })
+
+  /*当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色*/
+  var $div = $('#change-bgc')
+  $div.on('mouseover',function () {
+    $div.css('background-color','red')
+  }).on('mouseleave',function () {
+    $div.css('background-color','white')
+  })
+
+  /*当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字*/
+  var $inp = $('#inp')
+  $inp.on('focus',function () {
+    $inp.css('border-color','blue')
+  }).on('input',function () {
+    if(/[a-z]/.test($inp.val())){
+      $inp.val($inp.val().toUpperCase())
+    }
+  }).on('blur',function () {
+    $inp.css('border-color','')
+    if($inp.val() != '') {
+      console.log('输入框里的内容：' + $inp.val())
+    }
+  })
+
+  /*当选择 select 后，获取用户选择的内容*/
+  $('#city').on('change',function () {
+    $('#chosed').text($(this).val());
+  })
+
+
+
+</script>
+</body>
+</html>
